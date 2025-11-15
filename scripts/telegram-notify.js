@@ -8,27 +8,71 @@ class TelegramNotifier {
         this.chatId = process.env.TELEGRAM_CHAT_ID;
     }
 
+    // Поиск Allure отчета в разных возможных местах
+    findAllureSummary() {
+        const possiblePaths = [
+            'allure-report/widgets/summary.json',
+            'allure-results/widgets/summary.json', 
+            'target/allure-results/widgets/smary.json',
+            'build/allure-results/widgets/summary.json',
+            'allure-results/summary.json'
+        ];
+
+        for (const summaryPath of possiblePaths) {
+            const fullPath = path.join(process.cwd(), summaryPath);
+            console.log(`🔍 Проверяем путь: ${fullPath}`);
+            if (fs.existsSync(fullPath)) {
+                console.log(`✅ Найден отчет: ${summaryPath}`);
+                return fullPath;
+            }
+        }
+        
+        console.log('❌ Allure отчет не найден ни в одном из возможных мест');
+        return null;
+    }
+
     // Чтение результатов из Allure отчета
     parseAllureResults() {
         try {
-            const summaryPath = path.join(process.cwd(), 'allure-report', 'widgets', 'summary.json');
+            const summaryPath = this.findAllureSummary();
             
-            if (fs.existsSync(summaryPath)) {
-                const summary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
+            if (summaryPath) {
+                const summaryContent = fs.readFileSync(summaryPath, 'utf8');
+                console.log('📄 Содержимое summary.json:', summaryContent);
+                
+                const summary = JSON.parse(summaryContent);
                 return {
-                    passed: summary.statistic.passed,
-                    failed: summary.statistic.failed,
-                    broken: summary.statistic.broken,
-                    skipped: summary.statistic.skipped,
-                    total: summary.statistic.total,
-                    duration: summary.time.duration
+                    passed: summary.statistic?.passed || 0,
+                    failed: summary.statistic?.failed || 0,
+                    broken: summary.statistic?.broken || 0,
+                    skipped: summary.statistic?.skipped || 0,
+                    total: summary.statistic?.total || 0,
+                    duration: summary.time?.duration || 0
                 };
             }
         } catch (error) {
-            console.log('Allure report not found, using default values');
+            console.log('❌ Ошибка чтения Allure отчета:', error.message);
         }
 
-        // Значения по умолчанию если отчет не найден
+        // Если отчет не найден, попробуем получить данные из других источников
+        return this.getFallbackResults();
+    }
+
+    // Резервный метод если Allure недоступен
+    getFallbackResults() {
+        console.log('🔄 Используем резервный метод получения результатов');
+        
+        // Попробуем прочитать из результатов Playwright
+        try {
+            // Ищем результаты тестов в других форматах
+            const playwrightReport = path.join(process.cwd(), 'playwright-report');
+            if (fs.existsSync(playwrightReport)) {
+                console.log('📁 Найден playwright-report');
+            }
+        } catch (error) {
+            console.log('❌ Резервный метод также не сработал');
+        }
+
         return {
             passed: 0,
             failed: 0,
@@ -41,6 +85,7 @@ class TelegramNotifier {
 
     // Форматирование времени
     formatDuration(ms) {
+        if (!ms) return '0s';
         const minutes = Math.floor(ms / 60000);
         const seconds = ((ms % 60000) / 1000).toFixed(0);
         return minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
@@ -55,18 +100,22 @@ class TelegramNotifier {
         const statusIcon = testResults.failed === 0 ? '✅' : '❌';
         const statusText = testResults.failed === 0 ? 'УСПЕХ' : 'НЕУДАЧА';
 
+        // Добавим информацию о проблеме с отчетом если все нули
+        const reportIssue = testResults.total === 0 ? 
+            '\n⚠️ *Примечание:* Allure отчет не сгенерирован или не найден' : '';
+
         return `
 ${statusIcon} *${statusText}* | Автотесты
 
 📊 *Статистика:*
 ✅ Пройдено: ${testResults.passed}
 ❌ Упало: ${testResults.failed}
-⚡ Сломано: ${testResults.broken}
+⚡ Слобано: ${testResults.broken}
 ⏩ Пропущено: ${testResults.skipped}
 📈 Успешность: ${successRate}%
 
 ⏱ *Длительность:* ${this.formatDuration(testResults.duration)}
-
+${reportIssue}
 🔗 *Детали:*
 Репозиторий: ${process.env.GITHUB_REPOSITORY}
 Ветка: ${process.env.GITHUB_REF_NAME}
@@ -116,12 +165,16 @@ ${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/$
     // Основная функция
     async notify() {
         try {
+            console.log('🚀 Запуск отправки уведомления...');
+            
             if (!this.botToken || !this.chatId) {
                 throw new Error('TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not set');
             }
 
             console.log('📡 Получение результатов тестов...');
             const testResults = this.parseAllureResults();
+            
+            console.log('📊 Результаты:', JSON.stringify(testResults, null, 2));
             
             console.log('✍️  Формирование сообщения...');
             const message = this.createMessage(testResults);
