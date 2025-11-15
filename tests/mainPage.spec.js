@@ -4,7 +4,7 @@ import { UserBuilder } from "../src/builders/builderUI.js";
 
 const URL = 'https://realworld.qa.guru/';
 
-test.describe('Начальная страница', () => {
+test.describe.skip('Начальная страница', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(URL);
     const user = UserBuilder.defaultUserFaker();

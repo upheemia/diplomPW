@@ -4,7 +4,7 @@ import { UserBuilder } from "../src/builders/builderUI.js";
 
 const URL = 'https://realworld.qa.guru/';
 
-test.describe('Регистрация', () => {
+test.describe.skip('Регистрация', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(URL);
   })

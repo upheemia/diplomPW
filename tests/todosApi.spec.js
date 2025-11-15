@@ -10,16 +10,8 @@ test.describe("API tests", () => {
     const api = new Api(request); //нужно спрятать в фикстуры 
     let r = await api.challenger.post(testinfo);
     const headers = r.headers();
-    console.log(`${testinfo.project.use.apiURL}${headers.location}`);
     token = headers["x-challenger"];
   });
-  //эта фикстура не сработала
-  // test.only("Получить статус 200 от /todos", { tag: '@API' }, async ({ api, request }, testinfo) => {
-  //   let response = await api.todos.getTodos(token, testinfo);
-  //   let body = await response.json();
-  //   expect(body.todos.length).toBe(10);
-  //   expect(response.status()).toBe(200);
-  // });
   test("Получить статус 200 от /todos/{id}", { tag: '@API' }, async ({ request }, testinfo) => {
     const api = new Api(request); //нужно спрятать в фикстуры 
     let response = await api.todos.getTodos(token, testinfo);
