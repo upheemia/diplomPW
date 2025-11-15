@@ -33,6 +33,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     apiURL: "https://apichallenges.eviltester.com",
+    baseURL: 'https://realworld.qa.guru/',
   },
 
   /* Configure projects for major browsers */

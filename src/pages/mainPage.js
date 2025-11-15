@@ -1,5 +1,8 @@
+import { test } from '@playwright/test';
+
 export class MainPage {
     constructor(page) {
+        this.page = page;
         this.singUpLink = page.getByRole('link', { name: 'Sign up' });
         this.loginLink = page.getByRole('link', { name: 'Login' });
         this.navigationBar = page.getByRole('navigation');
@@ -17,4 +20,9 @@ export class MainPage {
        await this.loginLink.click();
     }
 
+	async open() {
+		return test.step(`Переход на страницу {$URL}`, async (step) => {
+			await this.page.goto('/');
+		});
+	}
 }

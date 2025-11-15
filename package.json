@@ -6,19 +6,21 @@
     "test": "npx playwright test",
     "ui": "npx playwright test --ui",
     "allureFile": "npx allure awesome ./allure-results --single-file",
-    "test:api": "playwright test --grep @API"
+    "test:api": "playwright test --grep @API",
+    "notify": "node scripts/telegram-notify.js",
+    "test-telegram": "node scripts/test-telegram.js"
   },
   "keywords": [],
   "author": "Alin04ka",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@faker-js/faker": "^5.5.3",
-    "@playwright/test": "^1.50.1",
-    "@types/node": "^22.13.0"
+    "@faker-js/faker": "^10.0.0",
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^22.13.0",
+    "allure-playwright": "^3.4.2"
   },
   "dependencies": {
-    "allure": "^3.0.0-beta.18",
-    "allure-playwright": "^3.4.1"
+    "allure": "^3.0.0-beta.18"
   }
 }

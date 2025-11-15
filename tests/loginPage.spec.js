@@ -1,24 +1,18 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage, MainPage } from '../src/pages/index.js';
+import { expect } from '@playwright/test';
+import { test } from '../src/fixtures/index.js'
 import { UserBuilder } from "../src/builders/builderUI.js";
 
-
-const URL = 'https://realworld.qa.guru/';
-
-test.describe.skip('Авторизация', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto(URL);
+test.describe.only('Авторизация', () => {
+  test.beforeEach(async ({ app }) => {
+    await app.mainPage.open();
   })
-  test('Неуспешная авторизация пользователя', async ({ page }) => {
+  test('Неуспешная авторизация пользователя', async ({ app }) => {
    
     const user = UserBuilder.failUser();
-      
-    const mainPage = new MainPage(page);
-    const loginPage = new LoginPage(page);
 
-    await mainPage.gotoLogin();
-    await loginPage.login(user); 
-    await expect(loginPage.messageError).toContainText('Email not found sign in first');
+    await app.mainPage.gotoLogin();
+    await app.loginPage.login(user); 
+    await expect(app.loginPage.messageError).toContainText('Email not found sign in first');
   });
 })
 

@@ -1,0 +1,58 @@
+name: E2E
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        
+      - name: Установка Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+          
+      - name: Установка пакетов
+        run: npm i
+        
+      - name: Устанавливаем браузеры
+        run: npx playwright install --with-deps
+        
+      - name: Запускаем тесты
+        run: npm t
+        env:
+          STEP: ${{vars.STEP}}
+          SECRET: ${{secrets.MYSUPERSECRET}}
+        continue-on-error: true
+        
+      - name: Запускаем генерацию allure в одном файле
+        run: npm run allureFile
+        if: always()
+        continue-on-error: true
+        
+      - name: Сохраняем Allure отчет
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        with:
+          name: allure-report
+          path: allure-report
+          retention-days: 30
+          
+      - name: Отправка уведомления в Telegram
+        if: always()
+        run: node scripts/telegram-notify.js
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}

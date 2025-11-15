@@ -41,7 +41,7 @@ export class UserBuilder {
 
     static defaultUserFaker() {
         return new UserBuilder()
-          .withName(faker.name.firstName())
+          .withName(faker.person.firstName())
           .withEmail(faker.internet.email())
           .withPassword(faker.internet.password())
           .build();

@@ -1,50 +1,38 @@
-import { test, expect } from '@playwright/test';
-import { EditorPage, MainPage, RegisterPage } from '../src/pages/index.js';
-//import { test, expect } from '../src/fixtures/index.js'
+import { expect } from '@playwright/test';
+import { test } from '../src/fixtures/index.js'
 import { UserBuilder, ArticleBuilder } from "../src/builders/builderUI.js";
 
-
-const URL = 'https://realworld.qa.guru/';
-
-test.describe.skip('Посты', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto(URL);
+test.describe('Посты', () => {
+  test.beforeEach(async ({ app }) => {
+    await app.mainPage.open();
     const user = UserBuilder.defaultUserFaker();
-    
-    const mainPage = new MainPage(page);
-    const registerPage = new RegisterPage(page);
-
+ 
     //создаем экземпляры класса
-    await mainPage.gotoRegister();
-    await registerPage.register(user);
-    await mainPage.newArticleButton.click();
+    await app.mainPage.gotoRegister();
+    await app.registerPage.register(user);
+    await app.mainPage.newArticleButton.click();
   })
 
-  test('Создание поста', async ({ page }) => {
+  test('Создание поста', async ({ app }) => {
    
     const article = ArticleBuilder.defaultArticle();
 
-    const editorPage = new EditorPage(page);
-
-    await editorPage.createNewArticle(article);
+    await app.editorPage.createNewArticle(article);
     
-    await expect(editorPage.articleTitle).toContainText(article.title);
+    await expect(app.editorPage.articleTitle).toContainText(article.title);
   });
   
-  test('Удаление поста', async ({page }) => {
+  test('Удаление поста', async ({ app }) => {
    
     const article = ArticleBuilder.defaultArticle();
 
-    const editorPage = new EditorPage(page);
-    const mainPage = new MainPage(page);
-    
-    await editorPage.createNewArticle(article);
+    await app.editorPage.createNewArticle(article);
 
-    await expect(editorPage.articleTitle).toContainText(article.title);
+    await expect(app.editorPage.articleTitle).toContainText(article.title);
 
-    await editorPage.deleteArticle();
+    await app.editorPage.deleteArticle();
 
-    await expect(mainPage.messageText).toContainText('Articles not available.');
+    await expect(app.mainPage.messageText).toContainText('Articles not available.');
   });
 })
 

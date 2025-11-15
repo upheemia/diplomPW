@@ -1,24 +1,18 @@
-import { test, expect } from '@playwright/test';
-import { MainPage , RegisterPage } from '../src/pages/index.js';
+import { expect } from '@playwright/test';
+import { test } from '../src/fixtures/index.js'
 import { UserBuilder } from "../src/builders/builderUI.js";
 
-const URL = 'https://realworld.qa.guru/';
-
-test.describe.skip('Регистрация', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto(URL);
+test.describe.only('Регистрация', () => {
+  test.beforeEach(async ({ app }) => {
+    await app.mainPage.open();
   })
-  test('Успешная регистрация пользователя', async ({ page }) => {
+  test('Успешная регистрация пользователя', async ({ app }) => {
     const user = UserBuilder.defaultUserFaker();
-    
-    const mainPage = new MainPage(page);
-    const registerPage = new RegisterPage(page);
 
-    //создаем экземпляры класса
-    await mainPage.gotoRegister();
-    await registerPage.register(user);
+    await app.mainPage.gotoRegister();
+    await app.registerPage.register(user);
 
-    await expect(mainPage.navigationBar).toContainText(user.name);
+    await expect(app.mainPage.navigationBar).toContainText(user.name);
   });
 })
 

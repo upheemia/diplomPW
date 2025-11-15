@@ -1,28 +1,20 @@
-import { test, expect } from '@playwright/test';
-import { MainPage , RegisterPage } from '../src/pages/index.js';
+import { expect } from '@playwright/test';
+import { test } from '../src/fixtures/index.js'
 import { UserBuilder } from "../src/builders/builderUI.js";
 
-const URL = 'https://realworld.qa.guru/';
-
-test.describe.skip('Начальная страница', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto(URL);
+test.describe.only('Начальная страница', () => {
+  test.beforeEach(async ({ app }) => {
+    await app.mainPage.open();
     const user = UserBuilder.defaultUserFaker();
-    
-    const mainPage = new MainPage(page);
-    const registerPage = new RegisterPage(page);
 
-    await mainPage.gotoRegister();
-    await registerPage.register(user);
+    await app.mainPage.gotoRegister();
+    await app.registerPage.register(user);
   })
 
-  test('Отображение пустой страницы "Your Feed"', async ({ page }) => {
+  test('Отображение пустой страницы "Your Feed"', async ({ app }) => {
 
-    //создаем экземпляры класса
-    const mainPage = new MainPage(page);
-
-    await mainPage.yourFeedButton.click();
-    await expect(mainPage.messageText).toContainText('Articles not available.');
+    await app.mainPage.yourFeedButton.click();
+    await expect(app.mainPage.messageText).toContainText('Articles not available.');
   });
 })
 
