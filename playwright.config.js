@@ -13,6 +13,12 @@ import { defineConfig, devices } from '@playwright/test';
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
+  reporter: [
+    ['line'],
+    ['html', { outputFolder: 'playwright-report' }],
+    ['json', { outputFile: 'test-results.json' }],
+    ['allure-playwright'] // Добавьте эту строку
+  ],
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
