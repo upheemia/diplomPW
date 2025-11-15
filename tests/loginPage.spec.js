@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../src/fixtures/index.js'
 import { UserBuilder } from "../src/builders/builderUI.js";
 
-test.describe.only('Авторизация', () => {
+test.describe('Авторизация', () => {
   test.beforeEach(async ({ app }) => {
     await app.mainPage.open();
   })
