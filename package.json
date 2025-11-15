@@ -8,7 +8,8 @@
     "allureFile": "npx allure awesome ./allure-results --single-file",
     "test:api": "playwright test --grep @API",
     "notify": "node scripts/telegram-notify.js",
-    "test-telegram": "node scripts/test-telegram.js"
+    "test-telegram": "node scripts/test-telegram.js",
+    "parse-results": "node scripts/parse-results.js"
   },
   "keywords": [],
   "author": "Alin04ka",

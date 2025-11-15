@@ -56,3 +56,20 @@ jobs:
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_SERVER_URL: ${{ github.server_url }}
+      - name: Запускаем тесты с JSON репортером
+        run: npx playwright test --reporter=json,line --reporter-json-output=test-results.json
+        env:
+          STEP: ${{vars.STEP}}
+          SECRET: ${{secrets.MYSUPERSECRET}}
+        continue-on-error: true
+
+      - name: Парсим JSON результаты
+        if: always()
+        run: |
+          if [ -f "test-results.json" ]; then
+          echo "✅ test-results.json найден"
+          # Простой парсинг JSON результатов
+          npm run parse-results
+          else
+          echo "❌ test-results.json не найден"
+          fi      
