@@ -54,7 +54,7 @@ npm run allure
 
 ---
 <a id="jenkins"></a>
-##🤖 </a> Сборка в <a target="_blank" href="https://jenkins.autotests.cloud/job/pw-js-test/8/"> Jenkins </a>
+## 🤖 </a> Сборка в <a target="_blank" href="https://jenkins.autotests.cloud/job/pw-js-test/8/"> Jenkins </a>
 Для доступа в Jenkins необходима регистрация на ресурсе [Jenkins](https://jenkins.autotests.cloud/) Для запуска сборки необходимо перейти в раздел <code>Build with parameters</code>, выбрать необходимые параметры и нажать кнопку <code>Build</code>.
 <p align="center">
 <img title="jenkins" src="images_report/jenkins.png">
@@ -63,25 +63,25 @@ npm run allure
 
 ____
 <a id="allureReport"></a>
-##📋 </a> Пример <a target="_blank" href="https://jenkins.autotests.cloud/job/pw-js-test/8/allure/"> Allure-отчета </a>
+## 📋 </a> Пример <a target="_blank" href="https://jenkins.autotests.cloud/job/pw-js-test/8/allure/"> Allure-отчета </a>
 <p align="center">
 <img title="Allure Report" src="images_report/allure.png">
 </p>
 
 ____
 <a id="allureTestOpsReport"></a>
-##📖 </a> Пример <a target="_blank" href="https://allure.autotests.cloud/launch/49624"> Allure TestOps-отчета </a>
+## 📖 </a> Пример <a target="_blank" href="https://allure.autotests.cloud/launch/49624"> Allure TestOps-отчета </a>
 <p align="center">
-<img title="Allure TestOps Report" src="media/screenshots/allure-testops.png">
+<img title="Allure TestOps Report" src="images_report/allureTO.png">
 </p>
 
 ____
 <a id="tg"></a>
-##☎️ Уведомления в Telegram с использованием бота
+## ☎️ Уведомления в Telegram с использованием бота
 После завершения сборки, бот, созданный в <code>Telegram</code>, автоматически обрабатывает и отправляет сообщение с отчетом
 о прогоне тестов в чат.
 <div style="background-color: #18222d">
 <p align="center">
-<img width="40%" title="Telegram Notifications" src="/images_report/telega.png">
+<img width="40%" title="Telegram Notifications" src="images_report/telega.png">
 </p>
 </div>
