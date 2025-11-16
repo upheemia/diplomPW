@@ -55,7 +55,7 @@ npm run allureFile
 <p align="center">
 <img title="jenkins" src="images_report/jenkins.png">
 </p>
-После выполнения сборки, в блоке <code>Build History</code> напротив номера сборки появятся значки <code>Allure Report</code>, при клике на которые откроется страница с сформированным html-отчетом.
+После выполнения сборки появятся значки <code>Allure Report</code>, при клике на которые откроется страница с сформированным html-отчетом.
 
 ____
 <a id="allureReport"></a>
