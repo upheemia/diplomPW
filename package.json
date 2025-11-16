@@ -13,7 +13,6 @@
     "test-telegram": "node scripts/test-telegram.js",
     "parse-results": "node scripts/parse-results.js"
   },
-  "type": "module",
   "keywords": [],
   "author": "Alin04ka",
   "license": "ISC",
