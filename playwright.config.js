@@ -17,7 +17,7 @@ export default defineConfig({
     ['line'],
     ['html', { outputFolder: 'playwright-report' }],
     ['json', { outputFile: 'test-results.json' }],
-    ['allure-playwright'] // Добавьте эту строку
+    ['allure-playwright', { outputFolder: 'allure-results' }] // Добавьте эту строку
   ],
   testDir: './tests',
   /* Run tests in files in parallel */

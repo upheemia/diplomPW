@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test",
+    "test": "playwright test --reporter=line,allure-playwright",
     "ui": "npx playwright test --ui",
     "allureFile": "npx allure awesome ./allure-results --single-file",
     "allure:generate": "allure generate allure-results --clean -o allure-report",
