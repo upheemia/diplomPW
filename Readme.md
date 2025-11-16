@@ -34,13 +34,9 @@ ____
 ```
 npm test
 ```
-Для запуска тестов на API:
+Для запуска тестов по тегу API:
 ```
 npx playwright test --project=api
-```
-Для запуска тестов на UI:
-```
-npx playwright test --project=ui
 ```
 
 <a id="generateAllureReport"></a>
@@ -49,7 +45,7 @@ _____
 
 Для генерация отчетов использовать команду ниже:
 ```
-npm run allure
+npm run allureFile
 ```
 
 ---
