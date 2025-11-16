@@ -44,7 +44,6 @@ class TelegramNotifier {
                 return {
                     passed: summary.statistic?.passed || 0,
                     failed: summary.statistic?.failed || 0,
-                    broken: summary.statistic?.broken || 0,
                     skipped: summary.statistic?.skipped || 0,
                     total: summary.statistic?.total || 0,
                     duration: summary.time?.duration || 0
@@ -76,7 +75,6 @@ class TelegramNotifier {
         return {
             passed: 0,
             failed: 0,
-            broken: 0,
             skipped: 0,
             total: 0,
             duration: 0
@@ -110,7 +108,6 @@ ${statusIcon} *${statusText}* | Автотесты
 📊 *Статистика:*
 ✅ Пройдено: ${testResults.passed}
 ❌ Упало: ${testResults.failed}
-⚡ Слобано: ${testResults.broken}
 ⏩ Пропущено: ${testResults.skipped}
 📈 Успешность: ${successRate}%
 
