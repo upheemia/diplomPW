@@ -1,4 +1,4 @@
-<h1 align="center">Проект по автоматизации тестирования тестового сайта</h1>
+<h1 align="center">Автоматизация тестирования с использованием Playwright+js</h1>
 
 ##  Содержание:
 - <a href="#cases"> Тест-кейсы</a>
@@ -54,30 +54,30 @@ npm run allure
 
 ---
 <a id="jenkins"></a>
-## <img width="20" style="vertical-align:middle" title="Jenkins" src="media/logo/jenkins.svg"> </a> Сборка в <a target="_blank" href="https://jenkins.autotests.cloud/job/001-braunman-JsPlaywrightFinalWork/"> Jenkins </a>
+##🤖 </a> Сборка в <a target="_blank" href="https://jenkins.autotests.cloud/job/pw-js-test/8/"> Jenkins </a>
 Для доступа в Jenkins необходима регистрация на ресурсе [Jenkins](https://jenkins.autotests.cloud/) Для запуска сборки необходимо перейти в раздел <code>Build with parameters</code>, выбрать необходимые параметры и нажать кнопку <code>Build</code>.
 <p align="center">
-<img title="jenkins" src="media/screenshots/jenkins.png ">
+<img title="jenkins" src="images_report/jenkins.png">
 </p>
 После выполнения сборки, в блоке <code>Build History</code> напротив номера сборки появятся значки <code>Allure Report</code>, при клике на которые откроется страница с сформированным html-отчетом.
 
 ____
 <a id="allureReport"></a>
-## <img width="30" style="vertical-align:middle" title="Allure Report" src="media/logo/allure.svg"> </a> Пример <a target="_blank" href="https://jenkins.autotests.cloud/job/pw-js-test/8/allure/"> Allure-отчета </a>
+##📋 </a> Пример <a target="_blank" href="https://jenkins.autotests.cloud/job/pw-js-test/8/allure/"> Allure-отчета </a>
 <p align="center">
 <img title="Allure Report" src="images_report/allure.png">
 </p>
 
 ____
 <a id="allureTestOpsReport"></a>
-## <img width="30" style="vertical-align:middle" title="Allure TestOps Report" src="images_report/allureTO.png"> </a> Пример <a target="_blank" href="https://allure.autotests.cloud/launch/49624"> Allure TestOps-отчета </a>
+##📖 </a> Пример <a target="_blank" href="https://allure.autotests.cloud/launch/49624"> Allure TestOps-отчета </a>
 <p align="center">
 <img title="Allure TestOps Report" src="media/screenshots/allure-testops.png">
 </p>
 
 ____
 <a id="tg"></a>
-## <img width="30" style="vertical-align:middle" title="Telegram" src="media/logo/telegram.svg"> Уведомления в Telegram с использованием бота
+##☎️ Уведомления в Telegram с использованием бота
 После завершения сборки, бот, созданный в <code>Telegram</code>, автоматически обрабатывает и отправляет сообщение с отчетом
 о прогоне тестов в чат.
 <div style="background-color: #18222d">
