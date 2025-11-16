@@ -51,7 +51,8 @@ npm run allureFile
 ---
 <a id="jenkins"></a>
 ## 🤖 </a> Сборка в <a target="_blank" href="https://jenkins.autotests.cloud/job/pw-js-test/8/"> Jenkins </a>
-Для доступа в Jenkins необходима регистрация на ресурсе [Jenkins](https://jenkins.autotests.cloud/) Для запуска сборки необходимо перейти в раздел <code>Build with parameters</code>, выбрать необходимые параметры и нажать кнопку <code>Build</code>.
+Для доступа в Jenkins необходима регистрация на ресурсе [Jenkins](https://jenkins.autotests.cloud/) 
+Для запуска сборки необходимо перейти в раздел <code>Build with parameters</code>, выбрать необходимые параметры и нажать кнопку <code>Build</code>.
 <p align="center">
 <img title="jenkins" src="images_report/jenkins.png">
 </p>
