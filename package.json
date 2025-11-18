@@ -9,6 +9,7 @@
     "allure:generate": "allure generate allure-results --clean -o allure-report",
     "allure:serve": "allure serve allure-results",
     "test:api": "playwright test --grep @API",
+    "test:allure": "playwright test --reporter=line,allure-playwright && npm run allure:generate",
     "notify": "node scripts/telegram-notify.js",
     "test-telegram": "node scripts/test-telegram.js",
     "parse-results": "node scripts/parse-results.js"

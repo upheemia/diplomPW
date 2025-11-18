@@ -1,0 +1,16 @@
+{
+  "base": {
+    "project": "diplom",
+    "environment": "prod",
+    "comment": "smoke",
+    "reportLink": "https://jenkins.autotests.cloud/job/pw-js-test/8/allure/",
+    "language": "ru",
+    "allureFolder": "allure-report",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "8242588629:AAH7VRZXyZHwqeIYqDTrGipi7vDSRWTAM2k",
+    "chat": "-4964929719",
+    "replyTo": ""
+  }
+}
