@@ -1,10 +1,11 @@
+import { faker } from '@faker-js/faker';
+
 export class TodoBuilder {
   constructor() {
-    this.title = "title";
-    this.doneStatus = true;
-    this.description = "description";
+    this.title;
+    this.doneStatus;
+    this.description;
     this.testPriority;
-    this.id;
     }
 
   withTitle(title) {
@@ -27,11 +28,6 @@ export class TodoBuilder {
     return this;
   }
 
-  withId(id) {
-    this.id = id;
-    return this;
-  }
-
   build() {
     return {
       title: this.title,
@@ -43,6 +39,11 @@ export class TodoBuilder {
 
   // Статические методы для часто используемых сценариев
   static defaultTodo() {
-    return new TodoBuilder().build();
+    return new TodoBuilder()
+    .withTitle(faker.food.description())
+    .withDoneStatus(faker.datatype.boolean())
+    .withDescription(faker.food.description())
+    .withTestPriority()
+    .build();
   }
 }

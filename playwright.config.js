@@ -46,6 +46,7 @@ export default defineConfig({
     {
       name: 'api',
       grep: /@API/,
+      fullyParallel: false,
     },
     {
       name: 'negative',

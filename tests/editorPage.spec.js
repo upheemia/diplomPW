@@ -20,6 +20,7 @@ test.describe('Посты', () => {
     await app.editorPage.createNewArticle(article);
     
     await expect(app.editorPage.articleTitle).toContainText(article.title);
+    //await expect(app.editorPage.textArticle(article.text)).toBeVisible();
   });
   
   test('Удаление поста', async ({ app }) => {
